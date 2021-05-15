@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 .register form {
@@ -17,20 +18,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .register form label {
   margin: 0.5rem;
+  width: 100%;
 }
 
 .register form input {
   margin: 0.5rem;
   padding: 1rem;
   border-radius: 0.4rem;
+  width: 100%;
+  border: 1px solid var(--gray-500);
 }
 
 .register form button {
   margin: 0.5rem;
   padding: 1rem;
   border-radius: 0.4rem;
+  width: 100%;
 }

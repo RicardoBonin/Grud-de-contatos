@@ -5,7 +5,17 @@ import { useState } from 'react';
 const INITIAL_STATE = {
   name: '',
   email: '',
-  password: ''
+  password: '',
+  errors: {
+    error_name: false,
+    error_email: false,
+    error_password: false
+  },
+  errors_msg: {
+    error_name: '',
+    error_email: '',
+    error_password: ''
+  }
 };
 
 export default function Home() {
@@ -16,6 +26,36 @@ export default function Home() {
 
     setState({ ...state, [name]: value });
   };
+
+  //validar nome
+
+  const validateName = name => {
+    if (name.length == 0) {
+      setState({
+        ...state.errors,
+        error_name: true
+      });
+      setState({
+        ...state.errors_msg,
+        error_name: 'Campo vazio. Por favor, coloque um nome valido.'
+      });
+    } else {
+      setState({
+        ...state.errors,
+        error_name: false
+      });
+    }
+  };
+
+  //validade email
+
+  //validar senha
+
+  //Cadastra usuário
+
+  const registerUser = () => {
+    validateName(state.name);
+  };
   console.log(state);
   return (
     <div className={styles.container}>
@@ -24,7 +64,6 @@ export default function Home() {
       </Head>
       <div className={styles.register}>
         <h1>Cadastro de Usuário</h1>
-
         <form>
           <label htmlFor="name">Nome</label>
           <input type="text" name="name" onChange={handlerChange} id="name" />
@@ -42,8 +81,16 @@ export default function Home() {
             onChange={handlerChange}
             id="password"
           />
-          <button type="click">Cadastrar</button>
+          <button type="button" onClick={registerUser}>
+            Cadastrar
+          </button>
         </form>
+
+        {state.errors.error_name && (
+          <div>
+            <p>Error</p>
+          </div>
+        )}
       </div>
     </div>
   );
