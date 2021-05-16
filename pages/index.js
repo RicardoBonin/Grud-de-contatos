@@ -20,7 +20,7 @@ const INITIAL_STATE = {
 
 export default function Home() {
   const [state, setState] = useState(INITIAL_STATE);
-
+  //const { error_name, error_email, error_password } = state.errors;
   const handlerChange = e => {
     const { name, value } = e.target;
 
@@ -32,31 +32,43 @@ export default function Home() {
   const validateName = name => {
     if (name.length == 0) {
       setState({
-        ...state.errors,
-        error_name: true
-      });
-      setState({
-        ...state.errors_msg,
-        error_name: 'Campo vazio. Por favor, coloque um nome valido.'
+        ...state,
+        errors: { ...state.errors, error_name: true },
+        errors_msg: {
+          ...state.errors,
+          error_name: 'Empty field. Please fill in the field with your name.'
+        }
       });
     } else {
       setState({
-        ...state.errors,
-        error_name: false
+        ...state,
+        errors: { ...state.errors, error_name: false },
+        errors_msg: { ...state.errors, error_name: '' }
       });
     }
   };
 
   //validade email
+  const validadeEmail = email => {
+    const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    console.log('>>>', reg.test(email));
+  };
 
   //validar senha
+
+  const validadePassword = password => {
+    const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+    console.log('>>>', reg.test(password));
+  };
 
   //Cadastra usuário
 
   const registerUser = () => {
     validateName(state.name);
+    validadeEmail(state.email);
   };
   console.log(state);
+  console.log(state.errors);
   return (
     <div className={styles.container}>
       <Head>
@@ -86,11 +98,13 @@ export default function Home() {
           </button>
         </form>
 
-        {state.errors.error_name && (
+        {state.errors.error_name ||
+        state.errors.error_email ||
+        state.errors.error_password ? (
           <div>
-            <p>Error</p>
+            {state.errors.error_name && <p>{state.errors_msg.error_name}</p>}
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
