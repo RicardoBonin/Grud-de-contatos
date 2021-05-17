@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 4rem 1rem;
 }
 
 .register {
@@ -39,4 +40,36 @@
   padding: 1rem;
   border-radius: 0.4rem;
   width: 100%;
+}
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ff000055;
+  border: 1px solid red;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.errors p {
+  margin-top: 1rem;
+  color: #ff0000;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #00800055;
+  border: 1px solid #008000;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.success p {
+  color: #008000;
+  text-align: center;
 }
